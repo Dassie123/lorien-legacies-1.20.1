@@ -1,6 +1,7 @@
 package net.scarab.lorienlegacies.entity;
 
 import net.minecraft.block.BlockState;
+import net.scarab.lorienlegacies.util.ExplosiveChainHandler;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -42,8 +43,9 @@ public class KineticProjectileEntity extends ThrownItemEntity {
         super.onEntityHit(entityHitResult);
 
         if (!this.getWorld().isClient()) {
-            // Create explosion at the projectile's position
-            this.getWorld().createExplosion(
+            // Create explosion at the projectile's position, chaining into nearby victims
+            ExplosiveChainHandler.detonate(
+                    this.getWorld(),
                     this,
                     this.getX(), this.getY(), this.getZ(),
                     3.0f,
@@ -78,8 +80,9 @@ public class KineticProjectileEntity extends ThrownItemEntity {
         }
         // EXPLOSION CENTERING CODE END
 
-        // Create explosion at determined location
-        this.getWorld().createExplosion(
+        // Create explosion at determined location, chaining into nearby victims
+        ExplosiveChainHandler.detonate(
+                this.getWorld(),
                 this, // cause
                 x, y, z /* Coordinates supplied by above EXPLOSION CENTERING CODE */,
                 3.0F,

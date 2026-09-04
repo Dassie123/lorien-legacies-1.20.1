@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 
 import net.minecraft.world.explosion.Explosion;
 import net.scarab.lorienlegacies.item.ModItems;
+import net.scarab.lorienlegacies.util.ExplosiveChainHandler;
 
 import java.util.List;
 
@@ -67,8 +68,11 @@ public class SpikyBlackBallEntity extends Entity implements FlyingItemEntity {
                 }
                 // EXPLOSION CENTERING CODE END
 
-                // Create explosion at determined location
-                this.getWorld().createExplosion(
+                // Create explosion at determined location, chaining into nearby victims with a
+                // weaker blast each generation - the centring above fixes the direct hit, the
+                // chain is what reaches the rest of a tight pack
+                ExplosiveChainHandler.detonate(
+                        this.getWorld(),
                         this, // cause
                         x, y, z /* Coordinates supplied by above EXPLOSION CENTERING CODE */,
                         3.0F,
