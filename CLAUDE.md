@@ -1,6 +1,6 @@
 If this project has a `notes.md`, read it at the start of a chat and after a context clear, before
 doing anything else. It holds gotchas and hard-won constraints - things that look like bugs but are
-deliberate. There is none here yet; when one is added, this instruction already covers it. Write to
+deliberate. It also carries this project's last shipped changelog at the bottom - see there. Write to
 it only for gotchas, non-obvious root causes, "why not the obvious approach" decisions and big
 architectural choices - never as a running progress log.
 
